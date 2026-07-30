@@ -34,7 +34,7 @@ You will practice:
 
 #### System Architecture
 
-![System Architecture](images/1-introduce/system-architecture.png)
+![System Architecture](images/1-introduce/system-architecture.jpeg)
 
 *Figure 1. System Architecture.*
 The pipeline has **three main flows**:

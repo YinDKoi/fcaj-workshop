@@ -70,7 +70,7 @@ In production, apply the **Least Privilege** principle — grant only the exact 
 
 #### Step 4: Build & Push Docker Image to ECR
 
-All Lambda Functions use **Docker Container Images** to package complex Python libraries (Polars, XGBoost, yfinance).
+All Lambda Functions use **Docker Container images** to package complex Python libraries (Polars, XGBoost, yfinance).
 
 ```bash
 # 1. Login to ECR
