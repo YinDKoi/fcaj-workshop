@@ -1,6 +1,6 @@
 ---
 title: "Week 5 Worklog"
-date: 2026-07-13
+date: 2026-07-06
 weight: 5
 chapter: false
 pre: " <b> 1.5. </b> "
@@ -8,31 +8,37 @@ pre: " <b> 1.5. </b> "
 
 ### Week 5 Objectives:
 
-* Develop the ETL pipeline for stock market data processing.
-* Perform feature engineering to generate predictive features.
-* Train and evaluate the XGBoost prediction model.
-* Store processed datasets and trained models.
+* Develop the machine learning model for stock price prediction.
+* Train and evaluate the prediction model.
+* Store the trained model for deployment.
+* Prepare the model for integration with the prediction service.
 
 ### Tasks to be carried out this week:
 
 | Day | Task | Start Date | Completion Date | Reference Material |
-| --- | -------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | ---------------------- |
-| 2 | - Develop the ETL workflow to read datasets from Amazon S3.<br>- Transform the data into a format suitable for model training. | 07/13/2026 | 07/13/2026 | Project Documentation |
-| 3 | - Perform feature engineering.<br>&emsp;+ Generate technical indicators.<br>&emsp;+ Normalize input features. | 07/14/2026 | 07/14/2026 | Project Source Code |
-| 4 | - Prepare the training and testing datasets.<br>- Verify data quality after the ETL process. | 07/15/2026 | 07/15/2026 | Internal Documentation |
-| 5 | - Train the XGBoost prediction model.<br>- Tune model parameters to improve prediction performance. | 07/16/2026 | 07/17/2026 | XGBoost Documentation |
-| 6 | - Evaluate model performance.<br>- Store processed datasets and trained models in Amazon S3. | 07/18/2026 | 07/19/2026 | Amazon S3 Documentation |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ------------------ |
+| 1 | Prepare the training dataset from processed stock data and split it into training and testing datasets. | 07/06/2026 | 07/06/2026 | Project Documentation |
+| 2 | Develop the machine learning model using the engineered features for stock price prediction. | 07/07/2026 | 07/07/2026 | Scikit-learn Documentation |
+| 3 | Train the prediction model and fine-tune hyperparameters to improve model performance. | 07/08/2026 | 07/08/2026 | Model Training Guide |
+| 4 | Evaluate the trained model using appropriate evaluation metrics and analyze prediction results. | 07/09/2026 | 07/09/2026 | Evaluation Report |
+| 5 | Store the trained machine learning model in Amazon S3 for deployment. | 07/10/2026 | 07/10/2026 | Amazon S3 Documentation |
+| 6 | Test loading the trained model from Amazon S3 and perform prediction validation. | 07/11/2026 | 07/11/2026 | Internal Testing |
+| 7 | Finalize model documentation and prepare for integration with the prediction API. | 07/12/2026 | 07/12/2026 | Project Documentation |
+
+---
 
 ### Week 5 Achievements:
 
-* Successfully developed the ETL pipeline for processing stock market datasets.
+* Successfully developed the machine learning model for stock price prediction.
 
-* Completed feature engineering to generate input features for the prediction model.
+* Trained and evaluated the model using the processed stock dataset and appropriate evaluation metrics.
 
-* Prepared training and testing datasets for model development.
+* Improved prediction performance through hyperparameter tuning and result analysis.
 
-* Successfully trained the XGBoost model and evaluated its prediction performance using appropriate evaluation metrics.
+* Successfully stored the trained model in Amazon S3 for deployment.
 
-* Stored the processed datasets and trained model in Amazon S3 for deployment.
+* Validated the model loading process and confirmed successful prediction testing.
 
-* Completed the Machine Learning development phase, providing the foundation for deploying the prediction service in the following week.
+* Completed the model documentation and prepared the prediction model for API integration.
+
+* Successfully completed the machine learning development phase and prepared for deployment in the following week.

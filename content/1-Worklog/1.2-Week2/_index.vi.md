@@ -1,6 +1,6 @@
 ---
 title: "Worklog Tuần 2"
-date: 2026-06-22
+date: 2026-06-15
 weight: 2
 chapter: false
 pre: " <b> 1.2. </b> "
@@ -8,32 +8,41 @@ pre: " <b> 1.2. </b> "
 
 ### Mục tiêu tuần 2:
 
-* Thiết lập môi trường AWS cho dự án.
-* Cấu hình các dịch vụ nền tảng của hệ thống ETL Serverless.
-* Chuẩn bị hạ tầng lưu trữ và cơ chế xử lý theo mô hình hướng sự kiện.
+* Xây dựng hạ tầng AWS phục vụ dự án.
+* Chuẩn bị các tài nguyên cần thiết cho Data Pipeline.
+* Thiết kế kiến trúc lưu trữ dữ liệu trên Amazon S3.
+* Thiết lập quyền truy cập và môi trường phát triển trên AWS.
 
-### Các công việc cần triển khai trong tuần này:
+### Công việc thực hiện trong tuần:
 
-| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
-| --- | -------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ---------------------- |
-| 2 | - Thiết lập AWS CLI và kiểm tra thông tin tài khoản.<br>- Tạo IAM User và IAM Role phục vụ phát triển dự án. | 22/06/2026 | 22/06/2026 | AWS IAM Documentation |
-| 3 | - Tạo Amazon S3 Bucket để lưu trữ dữ liệu.<br>- Thiết kế cấu trúc thư mục cho dữ liệu Raw, Processed và Model. | 23/06/2026 | 23/06/2026 | Amazon S3 Documentation |
-| 4 | - Cấu hình Amazon EventBridge để tự động kích hoạt quá trình thu thập dữ liệu hằng ngày.<br>- Thiết lập lịch thực thi cho Lambda Function. | 24/06/2026 | 24/06/2026 | Amazon EventBridge Documentation |
-| 5 | - Tạo và cấu hình Amazon SQS.<br>- Kiểm tra cơ chế truyền nhận Message giữa các Lambda Function. | 25/06/2026 | 25/06/2026 | Amazon SQS Documentation |
-| 6 | - Kiểm tra quyền truy cập giữa các dịch vụ AWS.<br>- Kiểm thử hoạt động của toàn bộ hạ tầng Cloud và hoàn thiện tài liệu cấu hình. | 26/06/2026 | 28/06/2026 | AWS Documentation |
+| Ngày | Công việc | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | ------------------ |
+| 1 | Thiết lập tài khoản AWS, cấu hình IAM User và IAM Role phục vụ cho quá trình phát triển và triển khai hệ thống. | 15/06/2026 | 15/06/2026 | AWS IAM Documentation |
+| 2 | Tạo các Amazon S3 Bucket phục vụ lưu trữ dữ liệu Raw, Cleansed, Processed và Machine Learning Model. | 16/06/2026 | 16/06/2026 | Amazon S3 Documentation |
+| 3 | Thiết kế cấu trúc thư mục lưu trữ dữ liệu trên S3, thống nhất quy tắc đặt tên và tổ chức dữ liệu theo từng giai đoạn của pipeline. | 17/06/2026 | 17/06/2026 | Design Notes |
+| 4 | Tìm hiểu Amazon EventBridge và xây dựng cơ chế tự động kích hoạt pipeline theo lịch hằng ngày. | 18/06/2026 | 18/06/2026 | EventBridge Documentation |
+| 5 | Nghiên cứu Amazon SQS và mô hình Fan-Out để xử lý song song dữ liệu chứng khoán từ nhiều mã cổ phiếu. | 19/06/2026 | 19/06/2026 | Amazon SQS Documentation |
+| 6 | Hoàn thiện sơ đồ kiến trúc AWS, xác định luồng tương tác giữa các dịch vụ trong hệ thống. | 20/06/2026 | 20/06/2026 | AWS Architecture Center |
+| 7 | Kiểm tra toàn bộ hạ tầng đã triển khai, rà soát quyền truy cập và chuẩn bị cho giai đoạn phát triển Lambda Functions. | 21/06/2026 | 21/06/2026 | Internal Review |
 
-### Kết quả đạt được tuần 2:
+---
+
+### Kết quả đạt được:
 
 * Hoàn thành việc thiết lập môi trường AWS phục vụ cho dự án.
 
-* Tạo và cấu hình thành công các Amazon S3 Bucket để lưu trữ dữ liệu theo từng giai đoạn của hệ thống.
+* Cấu hình thành công IAM User, IAM Role và các quyền truy cập cần thiết cho quá trình phát triển.
 
-* Thiết lập Amazon EventBridge để tự động hóa quá trình thu thập dữ liệu theo lịch.
+* Tạo và tổ chức các Amazon S3 Bucket theo từng giai đoạn xử lý dữ liệu:
+  * Raw Data
+  * Cleansed Data
+  * Processed Data
+  * Model Storage
 
-* Cấu hình Amazon SQS phục vụ giao tiếp bất đồng bộ giữa các Lambda Function.
+* Hiểu rõ cách EventBridge hoạt động để lập lịch tự động cho Data Pipeline.
 
-* Hoàn thành cấu hình IAM Role và quyền truy cập giữa các dịch vụ AWS theo nguyên tắc phân quyền tối thiểu.
+* Nghiên cứu mô hình xử lý bất đồng bộ bằng Amazon SQS nhằm tăng khả năng mở rộng và xử lý song song.
 
-* Kiểm tra thành công kết nối giữa EventBridge, Lambda, Amazon SQS và Amazon S3, đảm bảo kiến trúc Serverless hoạt động đúng như thiết kế.
+* Hoàn thiện bản thiết kế kiến trúc AWS và xác định luồng dữ liệu giữa các thành phần của hệ thống.
 
-* Hoàn thiện hạ tầng AWS ban đầu, sẵn sàng triển khai các chức năng ETL và Machine Learning trong các tuần tiếp theo.
+* Hoàn thành toàn bộ công việc chuẩn bị hạ tầng, sẵn sàng bước sang giai đoạn phát triển các Lambda Function trong tuần tiếp theo.

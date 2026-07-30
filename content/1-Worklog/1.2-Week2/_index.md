@@ -1,48 +1,48 @@
 ---
 title: "Week 2 Worklog"
-date: 2026-06-22
+date: 2026-06-15
 weight: 2
 chapter: false
 pre: " <b> 1.2. </b> "
 ---
 
-
-
 ### Week 2 Objectives:
 
-* Set up the AWS cloud environment for the project.
-* Configure the core cloud resources required for the ETL pipeline.
-* Prepare the storage structure and event-driven workflow.
-* Establish a secure development environment using IAM and AWS CLI.
+* Build the AWS infrastructure required for the project.
+* Prepare cloud resources for the Serverless Data Pipeline.
+* Design the Amazon S3 storage architecture.
+* Configure AWS permissions and development resources.
 
 ### Tasks to be carried out this week:
 
 | Day | Task | Start Date | Completion Date | Reference Material |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | ------------------ |
-| 1 | - Configure the AWS development environment.<br>- Verify AWS CLI credentials and default region settings.<br>- Create IAM users and roles for project development. | 06/22/2026 | 06/22/2026 | AWS IAM Documentation |
-| 2 | - Create Amazon S3 buckets for storing raw, processed, and model-related data.<br>- Organize folder structures for different stages of the ETL pipeline. | 06/23/2026 | 06/23/2026 | Amazon S3 Documentation |
-| 3 | - Configure Amazon EventBridge to automate the daily data collection process.<br>- Design the event scheduling strategy for Lambda execution. | 06/24/2026 | 06/24/2026 | Amazon EventBridge Documentation |
-| 4 | - Create and configure Amazon SQS queues for asynchronous task processing.<br>- Review message flow and retry mechanisms. | 06/25/2026 | 06/25/2026 | Amazon SQS Documentation |
-| 5 | - Configure project permissions between AWS services.<br>- Verify connectivity among EventBridge, Lambda, SQS, and S3 resources. | 06/26/2026 | 06/27/2026 | AWS Documentation |
-| 6 | - Test the initial cloud infrastructure.<br>- Document the deployment process and resource configuration. | 06/28/2026 | 06/28/2026 | Project Documentation |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ------------------ |
+| 1 | Configure the AWS account, IAM Users, and IAM Roles required for project development and deployment. | 06/15/2026 | 06/15/2026 | AWS IAM Documentation |
+| 2 | Create Amazon S3 buckets for Raw Data, Cleansed Data, Processed Data, and Machine Learning Models. | 06/16/2026 | 06/16/2026 | Amazon S3 Documentation |
+| 3 | Design the S3 directory structure and define the storage strategy for each stage of the ETL pipeline. | 06/17/2026 | 06/17/2026 | Design Notes |
+| 4 | Study Amazon EventBridge and configure scheduled events for automatic pipeline execution. | 06/18/2026 | 06/18/2026 | EventBridge Documentation |
+| 5 | Research Amazon SQS and the Fan-Out processing architecture for parallel stock data collection. | 06/19/2026 | 06/19/2026 | Amazon SQS Documentation |
+| 6 | Finalize the AWS architecture diagram and define interactions among AWS services. | 06/20/2026 | 06/20/2026 | AWS Architecture Center |
+| 7 | Review the deployed infrastructure, verify IAM permissions, and prepare for Lambda function development. | 06/21/2026 | 06/21/2026 | Internal Review |
 
 ---
 
 ### Week 2 Achievements:
 
-* Successfully configured the AWS development environment for the project.
+* Successfully completed the initial AWS infrastructure required for the project.
 
-* Created and organized Amazon S3 buckets to support multiple stages of the ETL workflow, including:
-  * Raw data storage
-  * Processed data storage
-  * Model-related artifacts
+* Configured IAM Users, IAM Roles, and access permissions for development and deployment.
 
-* Configured Amazon EventBridge to support scheduled execution of serverless workflows.
+* Created Amazon S3 buckets for different stages of the data pipeline, including:
+  * Raw Data
+  * Cleansed Data
+  * Processed Data
+  * Machine Learning Model Storage
 
-* Established Amazon SQS as the messaging service for asynchronous communication between Lambda functions.
+* Understood how Amazon EventBridge schedules automatic execution of the serverless data pipeline.
 
-* Configured IAM roles and permissions to enable secure interaction among AWS services while following the principle of least privilege.
+* Studied Amazon SQS and the Fan-Out architecture to enable scalable and parallel data processing.
 
-* Verified the connectivity between the primary cloud resources, ensuring that the event-driven architecture functioned as expected.
+* Completed the AWS system architecture and finalized the interaction flow between cloud services.
 
-* Completed the initial cloud infrastructure required for implementing the serverless ETL pipeline in the following development phases.
+* Finished all infrastructure preparation tasks and became ready to implement AWS Lambda functions in the following development phase.

@@ -1,6 +1,6 @@
 ---
 title: "Week 3 Worklog"
-date: 2026-06-29
+date: 2026-06-22
 weight: 3
 chapter: false
 pre: " <b> 1.3. </b> "
@@ -8,31 +8,37 @@ pre: " <b> 1.3. </b> "
 
 ### Week 3 Objectives:
 
-* Develop the automated stock data collection pipeline.
-* Implement AWS Lambda to retrieve stock data from Yahoo Finance.
-* Store raw datasets in Amazon S3.
-* Validate the event-driven data ingestion workflow.
+* Develop AWS Lambda functions for stock data collection.
+* Build the automated serverless data collection workflow.
+* Integrate Amazon EventBridge and Amazon SQS into the pipeline.
+* Test the complete stock data collection process.
 
 ### Tasks to be carried out this week:
 
 | Day | Task | Start Date | Completion Date | Reference Material |
-| --- | -------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | ---------------------- |
-| 2 | - Develop the Lambda Function for collecting stock market data from Yahoo Finance.<br>- Study the response format returned by the API. | 06/29/2026 | 06/29/2026 | Yahoo Finance Documentation |
-| 3 | - Process the collected data and convert it into JSON format.<br>- Design the storage structure in Amazon S3. | 06/30/2026 | 06/30/2026 | Amazon S3 Documentation |
-| 4 | - Integrate Lambda with Amazon EventBridge to schedule daily data collection.<br>- Verify the upload process to Amazon S3. | 07/01/2026 | 07/01/2026 | AWS Lambda Documentation |
-| 5 | - Integrate Amazon SQS for asynchronous message delivery.<br>- Test message publishing and consumption. | 07/02/2026 | 07/03/2026 | Amazon SQS Documentation |
-| 6 | - Perform end-to-end testing of the data ingestion workflow.<br>- Monitor Lambda execution using Amazon CloudWatch and resolve identified issues. | 07/04/2026 | 07/05/2026 | Amazon CloudWatch Documentation |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ------------------ |
+| 1 | Develop an AWS Lambda function to collect stock market data from Yahoo Finance. | 06/22/2026 | 06/22/2026 | AWS Lambda Documentation |
+| 2 | Develop the Producer Lambda function to publish messages to Amazon SQS for parallel processing. | 06/23/2026 | 06/23/2026 | Amazon SQS Documentation |
+| 3 | Configure Amazon EventBridge to automatically trigger the data collection workflow on a scheduled basis. | 06/24/2026 | 06/24/2026 | Amazon EventBridge Documentation |
+| 4 | Implement the Consumer Lambda function to receive SQS messages and process collected stock data. | 06/25/2026 | 06/25/2026 | AWS Lambda Documentation |
+| 5 | Store collected stock data in Amazon S3 following the predefined storage structure. | 06/26/2026 | 06/26/2026 | Amazon S3 Documentation |
+| 6 | Perform end-to-end testing of the EventBridge → Lambda → Amazon SQS → Lambda → Amazon S3 workflow. | 06/27/2026 | 06/27/2026 | Internal Testing |
+| 7 | Fix implementation issues, optimize Lambda execution time, and verify data stored in Amazon S3. | 06/28/2026 | 06/28/2026 | Testing Report |
+
+---
 
 ### Week 3 Achievements:
 
-* Successfully implemented the Lambda Function for collecting stock market data from Yahoo Finance.
+* Successfully developed AWS Lambda functions for automated stock data collection.
 
-* Built an automated data collection workflow using Amazon EventBridge.
+* Configured Amazon EventBridge to trigger the serverless workflow automatically based on a predefined schedule.
 
-* Stored raw datasets in Amazon S3 following the predefined folder structure.
+* Implemented asynchronous processing using Amazon SQS to improve the scalability of the system.
 
-* Integrated Amazon SQS to support asynchronous communication between system components.
+* Successfully collected stock market data from Yahoo Finance and stored it in Amazon S3 following the designed storage architecture.
 
-* Monitored Lambda execution using Amazon CloudWatch to ensure stable and reliable data collection.
+* Completed end-to-end testing of the EventBridge, AWS Lambda, Amazon SQS, and Amazon S3 workflow.
 
-* Completed the Data Ingestion phase, providing the foundation for data validation and ETL processing in the following development stage.
+* Optimized Lambda execution performance and resolved issues identified during system testing.
+
+* Successfully completed the Data Collection Pipeline and prepared the project for the ETL implementation phase in the following week.

@@ -1,6 +1,6 @@
 ---
 title: "Worklog Tuần 6"
-date: 2026-07-20
+date: 2026-07-13
 weight: 6
 chapter: false
 pre: " <b> 1.6. </b> "
@@ -8,31 +8,37 @@ pre: " <b> 1.6. </b> "
 
 ### Mục tiêu tuần 6:
 
-* Triển khai dịch vụ dự đoán giá cổ phiếu.
-* Xây dựng API phục vụ truy xuất kết quả dự đoán.
-* Lưu trữ kết quả dự đoán trên Amazon DynamoDB.
-* Phát triển Dashboard trực quan hóa dữ liệu và kết quả dự đoán.
+* Triển khai mô hình Machine Learning lên môi trường AWS.
+* Xây dựng API phục vụ dự đoán giá cổ phiếu.
+* Tích hợp các thành phần của hệ thống Serverless.
+* Kiểm thử toàn bộ quy trình từ thu thập dữ liệu đến trả kết quả dự đoán.
 
-### Các công việc cần triển khai trong tuần này:
+### Công việc thực hiện trong tuần:
 
-| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
-| --- | -------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ---------------------- |
-| 2 | - Triển khai Lambda Function phục vụ dự đoán giá cổ phiếu.<br>- Tích hợp mô hình XGBoost đã huấn luyện vào Lambda. | 20/07/2026 | 20/07/2026 | AWS Lambda Documentation |
-| 3 | - Thiết kế và cấu hình Amazon DynamoDB để lưu trữ kết quả dự đoán.<br>- Kiểm tra khả năng ghi và đọc dữ liệu. | 21/07/2026 | 21/07/2026 | Amazon DynamoDB Documentation |
-| 4 | - Xây dựng REST API bằng Amazon API Gateway.<br>- Kết nối API Gateway với Lambda Predictor. | 22/07/2026 | 22/07/2026 | Amazon API Gateway Documentation |
-| 5 | - Phát triển Dashboard bằng Streamlit.<br>- Hiển thị dữ liệu lịch sử và kết quả dự đoán theo thời gian. | 23/07/2026 | 24/07/2026 | Streamlit Documentation |
-| 6 | - Kiểm thử toàn bộ quy trình dự đoán từ API đến Dashboard.<br>- Kiểm tra hiệu năng và xử lý các lỗi phát sinh. | 25/07/2026 | 26/07/2026 | Project Documentation |
+| Day | Task | Start Date | Completion Date | Reference Material |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | ------------------ |
+| 1 | Xây dựng AWS Lambda phục vụ suy luận (Inference) bằng cách tải mô hình đã huấn luyện từ Amazon S3. | 13/07/2026 | 13/07/2026 | AWS Lambda Documentation |
+| 2 | Cấu hình Amazon API Gateway để cung cấp REST API cho chức năng dự đoán giá cổ phiếu. | 14/07/2026 | 14/07/2026 | Amazon API Gateway Documentation |
+| 3 | Tích hợp API Gateway với Lambda Function và kiểm tra luồng xử lý yêu cầu từ người dùng. | 15/07/2026 | 15/07/2026 | AWS Documentation |
+| 4 | Kiểm thử API bằng nhiều bộ dữ liệu đầu vào, đánh giá tính chính xác của kết quả dự đoán và xử lý các trường hợp ngoại lệ. | 16/07/2026 | 16/07/2026 | API Testing Guide |
+| 5 | Theo dõi hoạt động của hệ thống bằng Amazon CloudWatch, kiểm tra log và xử lý các lỗi phát sinh trong quá trình triển khai. | 17/07/2026 | 17/07/2026 | Amazon CloudWatch Documentation |
+| 6 | Tối ưu thời gian phản hồi của API và hiệu suất thực thi của Lambda Function. | 18/07/2026 | 18/07/2026 | Performance Testing |
+| 7 | Thực hiện kiểm thử toàn bộ hệ thống từ thu thập dữ liệu, ETL, dự đoán đến trả kết quả thông qua API. | 19/07/2026 | 19/07/2026 | System Testing Report |
 
-### Kết quả đạt được tuần 6:
+---
 
-* Triển khai thành công Lambda Function phục vụ dự đoán giá cổ phiếu bằng mô hình XGBoost.
+### Kết quả đạt được:
 
-* Xây dựng API thông qua Amazon API Gateway để cung cấp kết quả dự đoán cho các ứng dụng bên ngoài.
+* Triển khai thành công mô hình Machine Learning lên môi trường AWS.
 
-* Hoàn thành cấu hình Amazon DynamoDB để lưu trữ và truy xuất dữ liệu dự đoán.
+* Xây dựng REST API cho phép người dùng gửi yêu cầu dự đoán và nhận kết quả thông qua Amazon API Gateway.
 
-* Phát triển Dashboard bằng Streamlit giúp trực quan hóa dữ liệu lịch sử và kết quả dự đoán.
+* Tích hợp hoàn chỉnh API Gateway với AWS Lambda và mô hình Machine Learning.
 
-* Kiểm thử thành công luồng xử lý từ yêu cầu dự đoán, thực thi mô hình, lưu trữ kết quả đến hiển thị trên Dashboard.
+* Sử dụng Amazon CloudWatch để giám sát hoạt động của hệ thống và hỗ trợ xử lý lỗi trong quá trình triển khai.
 
-* Hoàn thiện dịch vụ dự đoán và sẵn sàng cho giai đoạn kiểm thử tổng thể và hoàn thiện hệ thống.
+* Kiểm thử thành công toàn bộ quy trình xử lý từ thu thập dữ liệu, ETL, dự đoán đến trả kết quả cho người dùng.
+
+* Tối ưu hiệu suất của Lambda Function và cải thiện thời gian phản hồi của API.
+
+* Hoàn thành giai đoạn triển khai hệ thống và chuẩn bị cho quá trình kiểm thử tổng thể, hoàn thiện tài liệu trong tuần cuối.
