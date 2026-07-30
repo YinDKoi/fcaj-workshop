@@ -80,7 +80,7 @@ Lưu lại **Role ARN** — ví dụ:
 arn:aws:iam::123456789012:role/nasdaq-etl-lambda-role
 ```
 
-> *[TODO: Thêm ảnh màn hình IAM Role đã tạo trên AWS Console — `/images/2.4/iam-role-created.png`]*
+> *[TODO: Thêm ảnh màn hình IAM Role đã tạo trên AWS Console — `images/2.4/iam-role-created.png`]*
 
 ---
 
@@ -111,6 +111,6 @@ docker push \
     <YOUR_ACCOUNT_ID>.dkr.ecr.ap-southeast-1.amazonaws.com/nasdaq-etl-lambda:latest
 ```
 
-![Kho lưu trữ Amazon ECR với Docker Image](/images/2.4/ecr-image-pushed.png)
+![Kho lưu trữ Amazon ECR với Docker Image](images/2.4/ecr-image-pushed.png)
 
 *Hình 2.4. Kho lưu trữ Amazon Elastic Container Registry (ECR) chứa Docker image đã được đẩy lên thành công và sẵn sàng triển khai cho AWS Lambda.*

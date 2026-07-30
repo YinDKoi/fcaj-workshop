@@ -47,14 +47,14 @@ XGBClassifier(
 
 #### Kết quả Huấn luyện
 
-![Ma trận nhầm lẫn (Confusion Matrix)](/images/4.2/confusion-matrix.png)
+![Ma trận nhầm lẫn (Confusion Matrix)](images/4.2/confusion-matrix.png)
 
 *Hình 4.2. Ma trận nhầm lẫn (Confusion Matrix) của mô hình phân loại XGBoost trên tập dữ liệu kiểm thử, thể hiện số lượng mẫu được dự đoán đúng và sai cho từng lớp.*
 
-![Độ quan trọng của đặc trưng (Feature Importance)](/images/4.2/feature-importance.png)
+![Độ quan trọng của đặc trưng (Feature Importance)](images/4.2/feature-importance.png)
 
 *Hình 4.3. Biểu đồ độ quan trọng của các đặc trưng (Feature Importance) do mô hình XGBoost tạo ra, cho thấy mức độ đóng góp của từng đặc trưng đã được xây dựng đối với bài toán dự đoán xu hướng giá cổ phiếu.*
-![Đường cong ROC](/images/4.2/roc-curve.png)
+![Đường cong ROC](images/4.2/roc-curve.png)
 
 *Hình 4.6. Đường cong ROC (Receiver Operating Characteristic) của mô hình XGBoost, thể hiện mối quan hệ giữa tỷ lệ dự đoán đúng dương (True Positive Rate) và tỷ lệ dương giả (False Positive Rate) tại các ngưỡng phân loại khác nhau.*
 | Chỉ số | Giá trị |
@@ -93,7 +93,7 @@ Lambda Predictor sẽ:
 3. Tính toán Feature Engineering.
 4. Trả về xác suất dự đoán `P(Tăng)` và nhãn `1/0`.
 
-![Cấu hình Lambda Predictor](/images/4.2/lambda-predictor-config.png)
+![Cấu hình Lambda Predictor](images/4.2/lambda-predictor-config.png)
 
 *Hình 4.5. Cấu hình Lambda Predictor chịu trách nhiệm tải mô hình XGBoost đã huấn luyện và xử lý các yêu cầu dự đoán theo thời gian thực từ Amazon API Gateway.*
 ---
@@ -116,6 +116,6 @@ Response:
 }
 ```
 
-![Cấu hình Endpoint của Amazon API Gateway](/images/4.2/api-gateway-endpoint.png)
+![Cấu hình Endpoint của Amazon API Gateway](images/4.2/api-gateway-endpoint.png)
 
 *Hình 4.4. Endpoint của Amazon API Gateway được cấu hình để cung cấp dịch vụ dự đoán cổ phiếu dưới dạng RESTful API, cho phép các ứng dụng bên ngoài gửi yêu cầu dự đoán thông qua giao thức HTTPS.*

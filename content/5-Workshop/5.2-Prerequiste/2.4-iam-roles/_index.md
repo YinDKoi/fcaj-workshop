@@ -95,6 +95,6 @@ docker push \
     <YOUR_ACCOUNT_ID>.dkr.ecr.ap-southeast-1.amazonaws.com/nasdaq-etl-lambda:latest
 ```
 
-![Amazon ECR Repository with Docker Image](/images/2.4/ecr-image-pushed.png)
+![Amazon ECR Repository with Docker Image](images/2.4/ecr-image-pushed.png)
 
 *Figure 2.4. Amazon Elastic Container Registry (ECR) repository containing the Docker image successfully pushed and ready for deployment to AWS Lambda.*

@@ -10,7 +10,7 @@ pre : " <b> 5.2.3. </b> "
 
 Amazon SQS is the backbone of the **Fan-Out architecture** in Pipeline B. The Lambda Producer pushes chunks of ticker lists into the Queue, and multiple Lambda Consumers run in parallel to process them.
 
-![Amazon SQS Fan-Out Architecture](/images/2.3/sqs-fanout-architecture.png)
+![Amazon SQS Fan-Out Architecture](images/2.3/sqs-fanout-architecture.png)
 
 *Figure 2.3. Amazon SQS Fan-Out architecture, where the Lambda Producer partitions stock symbols into multiple message batches, enabling the Lambda Consumer to process them concurrently for scalable and efficient data ingestion.*
 ---
@@ -55,4 +55,4 @@ Expected result:
 
 Save this **Queue URL** — you will need it when configuring Lambda environment variables.
 
-> *[TODO: Add screenshot of SQS Queue created in AWS Console — `/images/2.3/sqs-queue-created.png`]*
+> *[TODO: Add screenshot of SQS Queue created in AWS Console — `images/2.3/sqs-queue-created.png`]*

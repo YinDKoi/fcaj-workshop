@@ -84,6 +84,6 @@ Hoặc chạy pipeline ETL hoàn chỉnh để kiểm tra:
 python debug_daily_pipeline.py
 ```
 
-![Ví dụ các chỉ báo kỹ thuật](/images/4.1/technical-indicators-chart.png)
+![Ví dụ các chỉ báo kỹ thuật](images/4.1/technical-indicators-chart.png)
 
 *Hình 4.1. Minh họa các chỉ báo kỹ thuật được tạo trong quá trình Feature Engineering, bao gồm đường trung bình động (Moving Average), chỉ số sức mạnh tương đối (RSI), MACD và Bollinger Bands, được sử dụng làm đặc trưng đầu vào cho mô hình dự đoán giá cổ phiếu.*

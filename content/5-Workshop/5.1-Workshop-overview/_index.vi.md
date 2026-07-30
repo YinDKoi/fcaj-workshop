@@ -34,7 +34,7 @@ Bạn sẽ thực hành:
 
 #### Kiến trúc hệ thống
 
-![System Architecture](/images/1-introduce/system-architecture.png)
+![System Architecture](images/1-introduce/system-architecture.png)
 
 *Figure 1. System Architecture.*
 Pipeline gồm **ba luồng xử lý chính**:

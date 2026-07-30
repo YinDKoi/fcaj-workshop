@@ -72,6 +72,6 @@ Nhập các thông tin:
 - **Default region:** `ap-southeast-1`
 - **Default output format:** `json`
 
-![Cấu hình AWS CLI](/images/2.1/aws-cli-configure.png)
+![Cấu hình AWS CLI](images/2.1/aws-cli-configure.png)
 
 *Hình 2.1. AWS CLI đã được cấu hình với Access Key, Secret Access Key và Region mặc định để truy cập các dịch vụ AWS.*

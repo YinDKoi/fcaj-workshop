@@ -72,6 +72,6 @@ Enter your:
 - **Default region:** `ap-southeast-1`
 - **Default output format:** `json`
 
-![AWS CLI Configuration](/images/2.1/aws-cli-configure.png)
+![AWS CLI Configuration](images/2.1/aws-cli-configure.png)
 
 *Figure 2.1. AWS CLI configured with credentials and default region for accessing AWS services.*

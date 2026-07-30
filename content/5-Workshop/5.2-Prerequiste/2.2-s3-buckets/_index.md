@@ -45,7 +45,7 @@ aws s3 mb s3://my-nasdaq-stock-simulation-2026-ap-southeast-1 \
     --region ap-southeast-1
 ```
 
-> *[TODO: Add screenshot of S3 buckets successfully created — `/images/2.2/s3-buckets-created.png`]*
+> *[TODO: Add screenshot of S3 buckets successfully created — `images/2.2/s3-buckets-created.png`]*
 
 ---
 
@@ -74,7 +74,7 @@ The `tickers.json` file contains **3,000+ NASDAQ tickers**. Upload it to S3:
 python upload_tickers_config.py --file tickers.json
 ```
 
-![Tickers Configuration Uploaded to Amazon S3](/images/2.2/s3-tickers-uploaded.png)
+![Tickers Configuration Uploaded to Amazon S3](images/2.2/s3-tickers-uploaded.png)
 
 *Figure 2.2. The `tickers.json` configuration file successfully uploaded to the Amazon S3 bucket for use by the Lambda Daily Collector.*
 {{%notice tip%}}

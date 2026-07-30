@@ -100,7 +100,7 @@ Participating in these technical sharing sessions provided valuable insights int
 
 <div style="text-align:center">
 
-![Figure 4.1](/images/4-Event/Event1.jpg)
+![Figure 4.1](images/4-Event/Event1.jpg)
 
 **Figure 4.1.** Evidence of participation in the AWS Agentic AI Build Week technical sharing sessions.
 

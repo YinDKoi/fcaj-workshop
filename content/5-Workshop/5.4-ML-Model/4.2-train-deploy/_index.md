@@ -48,15 +48,15 @@ XGBClassifier(
 
 #### Training Results
 
-![Confusion Matrix](/images/4.2/confusion-matrix.png)
+![Confusion Matrix](images/4.2/confusion-matrix.png)
 
 *Figure 4.2. Confusion Matrix of the XGBoost classification model on the test dataset, illustrating the number of correctly and incorrectly classified samples for each prediction class.*
 
-![Feature Importance](/images/4.2/feature-importance.png)
+![Feature Importance](images/4.2/feature-importance.png)
 
 *Figure 4.3. Feature Importance scores produced by the XGBoost model, highlighting the relative contribution of each engineered feature to the stock movement prediction task.*
 
-![ROC Curve](/images/4.2/roc-curve.png)
+![ROC Curve](images/4.2/roc-curve.png)
 
 *Figure 4.6. Receiver Operating Characteristic (ROC) Curve of the XGBoost classifier, illustrating the trade-off between the True Positive Rate and False Positive Rate across different decision thresholds.*
 
@@ -97,7 +97,7 @@ The Lambda Predictor performs the following tasks:
 3. Performs feature engineering.
 4. Returns the predicted probability `P(UP)` together with the predicted label (`1` or `0`).
 
-![Lambda Predictor Configuration](/images/4.2/lambda-predictor-config.png)
+![Lambda Predictor Configuration](images/4.2/lambda-predictor-config.png)
 
 *Figure 4.5. Configuration of the Lambda Predictor function responsible for loading the trained XGBoost model and serving real-time prediction requests received from Amazon API Gateway.*
 
@@ -124,6 +124,6 @@ Response:
 }
 ```
 
-![Amazon API Gateway Endpoint Configuration](/images/4.2/api-gateway-endpoint.png)
+![Amazon API Gateway Endpoint Configuration](images/4.2/api-gateway-endpoint.png)
 
 *Figure 4.4. Amazon API Gateway endpoint configured to expose the stock prediction service as a RESTful API, enabling external applications to request predictions through HTTPS.*

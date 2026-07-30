@@ -59,6 +59,6 @@ Label = 1  if Close(T+1) > Close(T)   → PRICE UP prediction
 Label = 0  if Close(T+1) ≤ Close(T)  → PRICE DOWN prediction
 ```
 
-![Technical Indicators Example](/images/4.1/technical-indicators-chart.png)
+![Technical Indicators Example](images/4.1/technical-indicators-chart.png)
 
 *Figure 4.1. Example visualization of technical indicators generated during feature engineering, including moving averages, Relative Strength Index (RSI), Moving Average Convergence Divergence (MACD), and Bollinger Bands, which are used as input features for the stock price prediction model.*

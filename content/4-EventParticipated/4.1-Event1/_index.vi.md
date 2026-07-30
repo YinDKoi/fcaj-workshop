@@ -99,7 +99,7 @@ Việc tham gia các buổi chia sẻ trong AWS Agentic AI Build Week đã giúp
 
 <div style="text-align:center">
 
-![Hình 4.1](/images/event1.jpg)
+![Hình 4.1](images/event1.jpg)
 
 **Hình 4.1.** Minh chứng tham gia AWS Agentic AI Build Week Technical Sharing Sessions.
 

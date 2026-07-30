@@ -49,7 +49,7 @@ curl -X POST \
     -d '{"ticker": "AAPL"}'
 ```
 
-![Kiểm thử Amazon API Gateway](/images/5/api-gateway-test.png)
+![Kiểm thử Amazon API Gateway](images/5/api-gateway-test.png)
 
 *Hình 5.1. Kiểm thử endpoint `/predict` của Amazon API Gateway, minh họa việc gửi yêu cầu thành công đến Lambda Predictor và nhận phản hồi JSON chứa kết quả dự đoán xu hướng giá cổ phiếu cùng xác suất dự đoán.*
 ---
@@ -68,11 +68,11 @@ Dashboard gồm hai trang:
 - **Trang 1 — Top Buy Signals:** Danh sách các mã cổ phiếu có xác suất tăng cao nhất theo mô hình ML.
 - **Trang 2 — Chi tiết Mã:** Biểu đồ kỹ thuật, chỉ báo và lịch sử dự đoán của một mã cụ thể.
 
-![Dashboard Streamlit - Top Buy Signals](/images/5/dashboard-top-buy.png)
+![Dashboard Streamlit - Top Buy Signals](images/5/dashboard-top-buy.png)
 
 *Hình 5.2. Dashboard Streamlit hiển thị các cổ phiếu có tín hiệu mua (Top Buy Signals) được xếp hạng dựa trên kết quả dự đoán của mô hình XGBoost từ dữ liệu thị trường mới nhất.*
 
-![Dashboard Streamlit - Chi tiết mã cổ phiếu](/images/5/dashboard-ticker-detail.png)
+![Dashboard Streamlit - Chi tiết mã cổ phiếu](images/5/dashboard-ticker-detail.png)
 
 *Hình 5.3. Giao diện Dashboard Streamlit hiển thị thông tin chi tiết của một mã cổ phiếu, bao gồm kết quả dự đoán, độ tin cậy, các đặc trưng đã được tạo và dữ liệu giá lịch sử gần đây.*
 ---
