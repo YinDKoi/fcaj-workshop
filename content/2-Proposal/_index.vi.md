@@ -55,7 +55,7 @@ Hệ thống vận hành dựa trên kiến trúc Serverless, chia làm 2 phân 
   * **Lambda ETL (Container Image):**
     1. Đọc Parquet từ S3 bằng **Polars**.
     2. Kiểm tra schema bằng **Pandera**.
-    3. Kiểm tra quy tắc nghiệp vụ ($\text{High} \ge \text{Low}$, $\text{Open} > 0$, $\text{Close} > 0$, $\text{Volume} \ge 0$).
+    3. Kiểm tra quy tắc nghiệp vụ ($High \ge Low$, $Open > 0$, $Close > 0$, và $Volume \ge 0$).
     4. Loại bỏ bản ghi trùng lặp theo `(Date, Symbol)`.
     5. Xử lý Missing Values và chuẩn hóa kiểu dữ liệu.
     6. Gom các mã tổ chức lại theo năm nhằm giảm số lượng object trên S3 và tối ưu hiệu năng xử lý.

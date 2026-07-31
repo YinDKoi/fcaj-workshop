@@ -55,7 +55,7 @@ The solution operates on a Serverless Architecture decoupled into 2 independent 
   * **Lambda ETL (Container Image):**
     1. Reads Parquet from S3 using **Polars**.
     2. Validates Schema with **Pandera**.
-    3. Enforces business validation rules ($\text{High} \ge \text{Low}$, $\text{Open} > 0$, $\text{Close} > 0$, $\text{Volume} \ge 0$).
+    3. Enforces business validation rules ($High \ge Low$, $Open > 0$, $Close > 0$, and $Volume \ge 0$).
     4. Deduplicates records on `(Date, Symbol)`.
     5. Imputes missing values and standardizes data types.
     6. Aggregates data by year to reduce S3 object counts and optimize query throughput.
