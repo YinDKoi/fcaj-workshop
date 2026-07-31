@@ -8,13 +8,13 @@ pre : " <b> 5.2.4. </b> "
 
 #### Create IAM Roles for Lambda Functions
 
-Each Lambda Function needs an **IAM Execution Role** to access other AWS services (S3, SQS, CloudWatch Logs).
+Each Lambda function requires an **IAM execution role** to access other AWS services, such as Amazon S3, Amazon SQS, and Amazon CloudWatch Logs.
 
 ---
 
-#### Step 1: Create Trust Policy Document
+#### Step 1: Create the Trust Policy Document
 
-Create `lambda-trust-policy.json`:
+Create a file named `lambda-trust-policy.json` with the following content:
 
 ```json
 {
@@ -33,7 +33,9 @@ Create `lambda-trust-policy.json`:
 
 ---
 
-#### Step 2: Create IAM Role
+#### Step 2: Create the IAM Role
+
+Run the following command to create the Lambda execution role:
 
 ```bash
 aws iam create-role \
@@ -43,58 +45,81 @@ aws iam create-role \
 
 ---
 
-#### Step 3: Attach Required Policies
+#### Step 3: Attach the Required IAM Policies
+
+Attach the following managed IAM policies to the role:
 
 ```bash
-# CloudWatch Logs (required for all Lambda)
+# Amazon CloudWatch Logs permissions (required for all Lambda functions)
 aws iam attach-role-policy \
     --role-name nasdaq-etl-lambda-role \
     --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
 
-# S3 Full Access
+# Amazon S3 Full Access
 aws iam attach-role-policy \
     --role-name nasdaq-etl-lambda-role \
     --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess
 
-# SQS Full Access
+# Amazon SQS Full Access
 aws iam attach-role-policy \
     --role-name nasdaq-etl-lambda-role \
     --policy-arn arn:aws:iam::aws:policy/AmazonSQSFullAccess
 ```
 
-{{%notice warning%}}
-In production, apply the **Least Privilege** principle — grant only the exact permissions each Lambda needs, instead of using `FullAccess`.
-{{%/notice%}}
+{{% notice warning %}}
+For production environments, always follow the **Principle of Least Privilege** by granting only the permissions required for each Lambda function instead of using broad `FullAccess` policies.
+{{% /notice %}}
 
 ---
 
-#### Step 4: Build & Push Docker Image to ECR
+#### Step 4: Retrieve the Role ARN
 
-All Lambda Functions use **Docker Container images** to package complex Python libraries (Polars, XGBoost, yfinance).
+Run the following command to obtain the IAM Role ARN:
 
 ```bash
-# 1. Login to ECR
+aws iam get-role \
+    --role-name nasdaq-etl-lambda-role \
+    --query 'Role.Arn' \
+    --output text
+```
+
+Save the returned **Role ARN** for later use.
+
+Example:
+
+```text
+arn:aws:iam::123456789012:role/nasdaq-etl-lambda-role
+```
+
+![Iam Role Created](/images/2.4/iam-role-created.png)
+
+---
+
+#### Step 5: Build and Push the Docker Image to Amazon ECR
+
+All Lambda functions in this project use **container images** to package Python dependencies such as **Polars**, **XGBoost**, and **yfinance**.
+
+```bash
+# 1. Authenticate Docker to Amazon ECR
 aws ecr get-login-password --region ap-southeast-1 | \
     docker login --username AWS --password-stdin \
     <YOUR_ACCOUNT_ID>.dkr.ecr.ap-southeast-1.amazonaws.com
 
-# 2. Create ECR Repository
+# 2. Create an Amazon ECR repository
 aws ecr create-repository \
     --repository-name nasdaq-etl-lambda \
     --region ap-southeast-1
 
-# 3. Build Docker Image
+# 3. Build the Docker image
 docker build -t nasdaq-etl-lambda:latest .
 
-# 4. Tag Image
+# 4. Tag the Docker image
 docker tag nasdaq-etl-lambda:latest \
     <YOUR_ACCOUNT_ID>.dkr.ecr.ap-southeast-1.amazonaws.com/nasdaq-etl-lambda:latest
 
-# 5. Push to ECR
+# 5. Push the image to Amazon ECR
 docker push \
     <YOUR_ACCOUNT_ID>.dkr.ecr.ap-southeast-1.amazonaws.com/nasdaq-etl-lambda:latest
 ```
 
-![Amazon ECR Repository with Docker Image](images/2.4/ecr-image-pushed.png)
-
-*Figure 2.4. Amazon Elastic Container Registry (ECR) repository containing the Docker image successfully pushed and ready for deployment to AWS Lambda.*
+![Ecr Image Pushed](/images/2.4/ecr-image-pushed.png)

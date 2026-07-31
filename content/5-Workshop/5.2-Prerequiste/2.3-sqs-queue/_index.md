@@ -55,6 +55,9 @@ Expected result:
 
 Save this **Queue URL** — you will need it when configuring Lambda environment variables.
 
+![Sqs Queue Created](/images/2.3/sqs-queue-created.png)
+
+
 #### Step 3: Configure Environment Variables
 
 Create or update the `.env` file in the project root directory:

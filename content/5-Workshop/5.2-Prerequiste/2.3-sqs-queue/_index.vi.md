@@ -10,9 +10,8 @@ pre : " <b> 5.2.3. </b> "
 
 Amazon SQS (Simple Queue Service) là trung tâm điều phối của kiến trúc **Fan-Out** trong Pipeline B. Lambda Producer sẽ đẩy các "chunk" danh sách ticker vào Queue, và các Lambda Consumer chạy song song để xử lý.
 
-> ![Kiến trúc Fan-Out với Amazon SQS](images/2.3/sqs-fanout-architecture.png)
+![Sqs Fanout Architecture](images/2.3/sqs-fanout-architecture.png)
 
-*Hình 2.3. Kiến trúc Fan-Out sử dụng Amazon SQS, trong đó Lambda Producer chia danh sách mã cổ phiếu thành nhiều lô thông điệp để Lambda Consumer xử lý song song, giúp tăng khả năng mở rộng và tối ưu hiệu năng thu thập dữ liệu.*
 ---
 
 #### Bước 1: Tạo SQS Queue
@@ -55,7 +54,7 @@ Kết quả mong đợi:
 
 Lưu lại **Queue URL** này — bạn sẽ cần nó khi cấu hình biến môi trường cho Lambda.
 
-> *[TODO: Thêm ảnh màn hình SQS Queue đã tạo thành công trên AWS Console — `images/2.3/sqs-queue-created.png`]*
+![Sqs Queue Created](/images/2.3/sqs-queue-created.png)
 
 ---
 
