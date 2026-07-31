@@ -109,17 +109,15 @@ Hệ thống vận hành dựa trên kiến trúc Serverless, chia làm 2 phân 
 * `Pandera` & `Scikit-Learn` / `XGBoost`
 
 **Quy trình triển khai:**
-$$
-\mathrm{Local\ Source\ Code}
-\longrightarrow
-\mathrm{Docker\ Build}
-\longrightarrow
-\mathrm{Amazon\ ECR}
-\longrightarrow
-\mathrm{AWS\ Lambda\ Container}
-\longleftarrow
-\mathrm{S3\ Trigger}
-$$
+Local Source Code
+        ↓
+Docker Build
+        ↓
+Amazon ECR
+        ↓
+AWS Lambda Container
+        ↑
+   S3 Trigger
 
 #### 2.4. Cấu trúc Mô-đun Lambda
 ```text
