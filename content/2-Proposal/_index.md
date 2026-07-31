@@ -109,15 +109,25 @@ The solution operates on a Serverless Architecture decoupled into 2 independent 
 * `Pandera` & `Scikit-Learn` / `XGBoost`
 
 **Deployment Workflow:**
-Local Source Code
-        ↓
-Docker Build
-        ↓
-Amazon ECR
-        ↓
-AWS Lambda Container
-        ↑
-   S3 Trigger
+```text
+
+[Local Source Code]
+        │
+        ▼
+   [Docker Build]
+        │
+        ▼
+    [Amazon ECR]
+        │
+        ▼
+[AWS Lambda Container]
+        ▲
+        │
+   (S3 Event Trigger)
+        │
+        ▼
+   [S3 Raw Bucket]
+```
 #### 2.4. Lambda Project Structure
 ```text
 Lambda ETL Architecture
