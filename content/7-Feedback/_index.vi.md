@@ -6,7 +6,6 @@ chapter: false
 pre: " <b> 7. </b> "
 ---
 
-# Chia sẻ và Phản hồi
 
 Tham gia chương trình **Workforce Bootcamp – First Cloud AI Journey (FCAJ)** là một trải nghiệm học tập vô cùng ý nghĩa đối với em. Chương trình không chỉ giúp em vận dụng những kiến thức đã học tại trường mà còn tạo điều kiện để tiếp cận các công nghệ điện toán đám mây hiện đại và quy trình phát triển phần mềm trong thực tế. Thông qua dự án **NASDAQ Stock Price Prediction & AWS Serverless ETL Pipeline**, em đã có cơ hội xây dựng và triển khai một hệ thống Machine Learning Serverless hoàn chỉnh trên nền tảng AWS.
 

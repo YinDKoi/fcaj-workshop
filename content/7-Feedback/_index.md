@@ -6,7 +6,6 @@ chapter: false
 pre: " <b> 7. </b> "
 ---
 
-# Sharing and Feedback
 
 Participating in the **Workforce Bootcamp – First Cloud AI Journey (FCAJ)** has been a valuable and rewarding experience. The internship not only allowed me to apply the knowledge learned at university but also exposed me to real-world cloud technologies and modern software development practices. Through the NASDAQ Stock Price Prediction project, I gained hands-on experience in designing, implementing, and deploying a complete serverless machine learning solution on AWS.
 

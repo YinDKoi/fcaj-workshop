@@ -6,7 +6,6 @@ chapter: false
 pre: " <b> 6. </b> "
 ---
 
-## Tự đánh giá
 
 Trong thời gian thực tập, tôi đã có cơ hội tham gia phát triển dự án **NASDAQ Stock Price Prediction & AWS Serverless ETL Pipeline**. Trong suốt quá trình thực hiện dự án, tôi được tham gia vào nhiều giai đoạn của vòng đời phát triển phần mềm, bao gồm xây dựng hạ tầng AWS, phát triển ứng dụng Serverless, thu thập dữ liệu, xây dựng quy trình ETL, phát triển mô hình Machine Learning, triển khai API, kiểm thử hệ thống và hoàn thiện tài liệu kỹ thuật.
 
