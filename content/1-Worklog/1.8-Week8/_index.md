@@ -8,10 +8,9 @@ pre: " <b> 1.8. </b> "
 
 ### Week 8 Objectives:
 
-* Finalize and validate the complete system.
-* Complete the project documentation.
-* Present the project outcomes.
-* Summarize the internship achievements and deliverables.
+* Finalize and validate the complete AWS Serverless ETL Pipeline.
+* Complete the internship report and workshop documentation.
+* Review all deliverables before submission.
 
 ### Tasks to be carried out this week:
 
@@ -19,24 +18,24 @@ pre: " <b> 1.8. </b> "
 | --- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ------------------ |
 | 1 | Review the entire system, verify all functionalities, and confirm system stability before project delivery. | 07/27/2026 | 07/27/2026 | Testing Report |
 | 2 | Finalize the technical documentation, deployment guide, and user manual for the application. | 07/28/2026 | 07/28/2026 | Project Documentation |
-| 3 | Prepare the project presentation, including the system architecture, data processing workflow, and project outcomes. | 07/29/2026 | 07/29/2026 | Presentation Materials |
-| 4 | Present the project to the mentor, receive feedback, and implement the final improvements to the system and documentation. | 07/30/2026 | 07/30/2026 | Internal Review |
-| 5 | Complete the internship report, deliver the project source code and documentation, and summarize the internship experience. | 07/31/2026 | 07/31/2026 | Internship Report |
+| 3 | Complete the internship report, including the project overview, system architecture, implementation details, and self-evaluation. | 07/29/2026 | 07/29/2026 | Internship Report |
+| 4 | Finalize the workshop documentation by reviewing all workshop steps, updating screenshots, and refining technical explanations. | 07/30/2026 | 07/30/2026 | Workshop Documentation |
+| 5 | Perform the final review of the internship report and workshop, apply necessary revisions, and prepare all deliverables for submission. | 07/31/2026 | 07/31/2026 | Final Deliverables |
 
 ---
 
 ### Week 8 Achievements:
 
-* Successfully completed all functional components of the **AWS Serverless ETL Pipeline for NASDAQ Stock Price Prediction** project.
+* Successfully completed the final verification and validation of the **AWS Serverless ETL Pipeline for NASDAQ Stock Price Prediction** project.
 
-* Verified the stability and reliability of the entire system through final testing and validation.
+* Finalized all technical documentation, deployment guides, and supporting project materials.
 
-* Completed all technical documentation, deployment guides, and user manuals.
+* Completed the internship report, including the project summary, implementation details, self-assessment, and internship outcomes.
 
-* Successfully presented the project to the mentor, received constructive feedback, and finalized the project deliverables.
+* Completed and refined the workshop documentation with clear implementation steps, architecture diagrams, and supporting screenshots.
 
-* Delivered the complete source code, project documentation, and supporting materials.
+* Performed a comprehensive review of all deliverables, corrected documentation issues, and ensured consistency across the project materials.
 
-* Completed the internship report and summarized the technical knowledge and practical experience gained throughout the internship.
+* Successfully submitted the complete internship report, workshop documentation, source code, and supporting resources.
 
-* Successfully concluded the internship by accomplishing all project objectives and gaining valuable hands-on experience in AWS Serverless architecture, ETL data processing, and cloud-based machine learning deployment.
+* Successfully concluded the internship by completing all required deliverables and strengthening practical experience in AWS Serverless architecture, ETL pipelines, and cloud-based machine learning deployment.
