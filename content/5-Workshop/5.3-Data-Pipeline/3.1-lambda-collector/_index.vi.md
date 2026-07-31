@@ -14,7 +14,7 @@ pre : " <b> 5.3.1. </b> "
 2. Chia nhỏ danh sách thành các chunk (mỗi chunk `CHUNK_SIZE=100` tickers).
 3. Gửi từng chunk như một SQS message vào `daily-collector-queue`.
 
-> *[TODO: Thêm ảnh minh họa luồng EventBridge → Lambda → SQS — `images/3.1/eventbridge-lambda-sqs-flow.png`]*
+![Eventbridge Lambda Sqs Flow](/images/3.1/eventbridge-lambda-sqs-flow.png)
 
 ---
 
@@ -29,9 +29,8 @@ Truy cập **AWS Lambda Console** và tạo function mới:
 - **Memory:** `512 MB`
 - **Timeout:** `5 phút`
 
-![Tạo AWS Lambda Function](images/3.1/lambda-create-function.png)
+![Lambda Create Function](/images/3.1/lambda-create-function.png)
 
-*Hình 3.2. Tạo AWS Lambda Function đóng vai trò là điểm khởi đầu của quy trình thu thập dữ liệu. Hàm được cấu hình sử dụng container image từ Amazon ECR và được Amazon EventBridge kích hoạt theo lịch định kỳ.*
 ---
 
 #### Bước 2: Cấu hình biến môi trường Lambda
@@ -46,7 +45,7 @@ Trong tab **Configuration → Environment variables**, thêm:
 | `CHUNK_SIZE` | `100` |
 | `AWS_REGION` | `ap-southeast-1` |
 
-> *[TODO: Thêm ảnh màn hình Environment Variables trong Lambda — `images/3.1/lambda-env-vars.png`]*
+![Lambda Env Vars](/images/3.1/lambda-env-vars.png)
 
 ---
 
@@ -75,7 +74,7 @@ aws events put-targets \
 Lịch `cron(0 0 ? * MON-FRI *)` nghĩa là **0:00 UTC từ Thứ Hai đến Thứ Sáu** — tương ứng với sau khi thị trường Mỹ đóng cửa (7:00 AM giờ Việt Nam).
 {{%/notice%}}
 
-> *[TODO: Thêm ảnh màn hình EventBridge Rule đã tạo — `images/3.1/eventbridge-rule.png`]*
+![Eventbridge Rule](/images/3.1/eventbridge-rule.png)
 
 ---
 
@@ -92,7 +91,7 @@ Tạo test event trong Lambda Console để kiểm tra hoạt động:
 
 Kiểm tra CloudWatch Logs để xác nhận Lambda đã đọc tickers và gửi SQS messages thành công.
 
-> *[TODO: Thêm ảnh CloudWatch Logs của Lambda chạy thành công — `images/3.1/cloudwatch-logs.png`]*
+![Cloudwatch Logs](/images/3.1/cloudwatch-logs.png)
 
 ---
 

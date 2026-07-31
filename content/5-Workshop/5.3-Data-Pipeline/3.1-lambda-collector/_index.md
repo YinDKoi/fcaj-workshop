@@ -14,9 +14,8 @@ pre : " <b> 5.3.1. </b> "
 2. Splits the list into chunks (`CHUNK_SIZE=100` tickers each).
 3. Sends each chunk as an SQS message to `daily-collector-queue`.
 
-![EventBridge → Lambda → Amazon SQS Workflow](images/3.1/eventbridge-lambda-sqs-flow.png)
+![Eventbridge Lambda Sqs Flow](/images/3.1/eventbridge-lambda-sqs-flow.png)
 
-*Figure 3.1. Event-driven workflow where Amazon EventBridge invokes the Lambda Producer on schedule, which retrieves the list of stock symbols and publishes message batches to Amazon SQS for parallel downstream processing.*
 ---
 
 #### Step 1: Create Lambda Function

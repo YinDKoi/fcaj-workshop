@@ -10,9 +10,8 @@ pre : " <b> 5.3.2. </b> "
 
 `lambda_quality_gate.py` nhận dữ liệu thô từ S3 Raw và kiểm duyệt nghiêm ngặt trước khi cho vào pipeline xử lý tiếp theo.
 
-![Luồng kiểm tra Quality Gate](images/3.2/quality-gate-flow.png)
+![Quality Gate Flow](/images/3.2/quality-gate-flow.png)
 
-*Hình 3.2. Quy trình kiểm tra Quality Gate. Lambda Quality Gate xác thực dữ liệu chứng khoán theo các quy tắc nghiệp vụ đã định nghĩa trước khi chuyển dữ liệu hợp lệ sang quy trình xử lý và cách ly các bản ghi không hợp lệ để kiểm tra thêm.*
 ---
 
 #### Cơ chế hoạt động
@@ -59,7 +58,7 @@ Biến môi trường:
 | `CLEANSED_DAILY_PREFIX` | `cleansed_daily/` |
 | `QUARANTINE_PREFIX` | `quarantine/` |
 
-> *[TODO: Thêm ảnh màn hình Lambda Quality Gate configuration — `images/3.2/lambda-quality-gate-config.png`]*
+![Lambda Quality Gate Config](/images/3.2/lambda-quality-gate-config.png)
 
 ---
 
@@ -86,4 +85,4 @@ Mỗi file trong `quarantine/` chứa metadata về lý do bị loại:
 Dữ liệu trong `quarantine/` không bị xóa — bạn có thể kiểm tra lại để debug và cải thiện quy tắc kiểm duyệt.
 {{%/notice%}}
 
-> *[TODO: Thêm ảnh S3 Console hiển thị file trong quarantine/ — `images/3.2/s3-quarantine-files.png`]*
+![S3 Quarantine Files](/images/3.2/s3-quarantine-files.png)
