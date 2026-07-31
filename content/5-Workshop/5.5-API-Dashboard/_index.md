@@ -45,7 +45,7 @@ Lambda `nasdaq-stock-predictor` is exposed via **AWS API Gateway** as a REST end
 streamlit run dashboard/streamlit_app.py
 ```
 
-Open browser at `http://localhost:8501`.
+Open browser at `http://nasdaq-ai-dashboard-2026-430970051812-ap-southeast-1-an.s3-website-ap-southeast-1.amazonaws.com/`.
 
 ![Streamlit Dashboard - Top Buy Signals](images/5/dashboard-top-buy.png)
 

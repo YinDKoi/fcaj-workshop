@@ -62,7 +62,7 @@ Chạy Dashboard tương tác Streamlit tại local:
 streamlit run dashboard/streamlit_app.py
 ```
 
-Mở trình duyệt tại `http://localhost:8501`.
+Mở trình duyệt tại `http://nasdaq-ai-dashboard-2026-430970051812-ap-southeast-1-an.s3-website-ap-southeast-1.amazonaws.com/`.
 
 Dashboard gồm hai trang:
 - **Trang 1 — Top Buy Signals:** Danh sách các mã cổ phiếu có xác suất tăng cao nhất theo mô hình ML.
