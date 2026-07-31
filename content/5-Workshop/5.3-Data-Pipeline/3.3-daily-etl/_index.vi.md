@@ -48,7 +48,7 @@ Biến môi trường:
 | `CLEANSED_DAILY_PREFIX` | `cleansed_daily/` |
 | `PROCESSED_PREFIX` | `processed/` |
 
-![Lambda Daily Etl Config](/images/3.3/lambda-daily-etl-config.png)
+![Lambda Daily Etl Config](images/3.3/lambda-daily-etl-config.png)
 
 ---
 
