@@ -17,10 +17,10 @@ pre : " <b> 2. </b> "
 | Mục | Nội dung |
 |:---|:---|
 | **Tên dự án** | END-TO-END DATA PIPELINE & BACKTESTING ENGINE FOR STOCK MARKET DIRECTION |
-| **Tác giả** | Vương Nhật Minh - 2212094, Phạm Đức Hoài Nam - 2212157, Doãn Anh Khôi - 2352601, Trần Quốc Khánh - 2311538 |
+| **Tác giả** | Vương Nhật Minh - 2212094, Phạm Đức Hoài Nam - 2212157, Doãn Anh Khôi - 2352601, Trần Quốc Khánh - 2311538, Nguyễn Huy Lượng - 2311997 |
 | **Người hướng dẫn** | Lữ Hoàn Thiện |
-| **Ngày bắt đầu** | 08/06/2026 |
-| **Ngày kết thúc** | 31/07/2026 |
+| **Ngày bắt đầu** | 15/06/2026 |
+| **Ngày kết thúc** | 15/08/2026 |
 
 ---
 
@@ -45,128 +45,126 @@ Hệ thống được thiết kế nhằm tự động hóa toàn bộ chu trìn
 
 ### 2. Kiến trúc Hệ thống (AWS Architecture)
 
-Hệ thống vận hành dựa trên kiến trúc Serverless, chia làm 2 phân hệ độc lập nhằm tối ưu hiệu năng:
+Hệ thống vận hành dựa trên kiến trúc **Serverless**, chia làm **ba luồng xử lý chính**:
 
-#### 2.1. Phân hệ Luồng dữ liệu & Huấn luyện (Batch Data Pipeline & Training)
-* **Data Validation & ETL Pipeline:**
-  * **EventBridge** kích hoạt `Lambda Downloader` vào cuối mỗi ngày giao dịch.
-  * **Lambda Downloader** tải dữ liệu OHLCV từ Yahoo Finance và lưu trực tiếp vào `S3 Raw Zone` dưới định dạng Parquet (`{SYMBOL}.parquet`).
-  * Khi có object mới trong thư mục `raw/`, **S3 Event Notification** tự động kích hoạt `Lambda ETL`.
-  * **Lambda ETL (Container Image):**
-    1. Đọc Parquet từ S3 bằng **Polars**.
-    2. Kiểm tra schema bằng **Pandera**.
-    3. Kiểm tra quy tắc nghiệp vụ (`High ≥ Low`, `Open > 0`, `Close > 0`, và `Volume ≥ 0`).
-    4. Loại bỏ bản ghi trùng lặp theo `(Date, Symbol)`.
-    5. Xử lý Missing Values và chuẩn hóa kiểu dữ liệu.
-    6. Gom các mã tổ chức lại theo năm nhằm giảm số lượng object trên S3 và tối ưu hiệu năng xử lý.
-    7. Ghi kết quả sang `S3 Processed Zone`.
+#### Luồng A – Backfill Dữ liệu Lịch sử
+Thu thập dữ liệu cổ phiếu NASDAQ từ năm 1962 đến nay, thực hiện Feature Engineering và lưu dưới dạng file Apache Parquet theo từng năm (`processed/YYYY.parquet`) vào S3.
+
+#### Luồng B – Cập nhật Hàng ngày (Data Pipeline)
+Pipeline này chạy mỗi ngày giao dịch, gồm 5 Lambda Function với kiến trúc **Fan-Out**:
+
+1. **EventBridge** kích hoạt `nasdaq-daily-collector` (Lambda Producer) hàng ngày.
+2. `nasdaq-daily-collector` đọc `tickers.json` từ S3, chia tickers thành các chunk (CHUNK_SIZE=100), và đẩy từng chunk vào SQS queue `daily-collector-queue`.
+3. **SQS Fan-Out**: `nasdaq-collector-producer` (Lambda Consumer) nhận SQS message song song và tải dữ liệu OHLCV từ Yahoo Finance, ghi Parquet vào `S3 Raw Zone` (`raw/{SYMBOL}.parquet`).
+4. `nasdaq-quality-gate` kiểm duyệt dữ liệu — dữ liệu hợp lệ vào `cleansed_daily/YYYY-MM-DD/`, dữ liệu lỗi vào `quarantine/YYYY-MM-DD/` kèm metadata.
+5. `nasdaq-daily-etl` đọc dữ liệu sạch, thực hiện **Feature Engineering** bằng **Polars**, gộp vào file Parquet chính (`processed/YYYY.parquet`), và xóa buffer tạm.
+
+Tất cả Lambda Function được đóng gói bằng **Docker** và đẩy lên **Amazon ECR**.
 
 ```text
-[Yahoo Finance] ──(EventBridge + Lambda lấy data hàng ngày)──> [S3 Raw Zone] (raw parquet)
-                                                                    │
-                                                           (S3 Event Trigger)
-                                                                    ▼
-                                                              [Lambda ETL]
-                                                                    │
-                                                           (Validation Pandera)
-                                                                    ▼
-                                                     [S3 Processed Zone] (clean parquet)
-                                                                    │
-                                                      (Feature Engineering Polars)
-                                                                    ▼
-[Athena + Glue Catalog] <──────────────────────────────── [S3 Feature Store]
-           │                                                        │
-           ▼                                                        ▼
-     [QuickSight]                                       [Local Training] (XGBoost)
-      *(Optional)                                                   │
-                                                                    ▼
-                                                          [S3 Model Registry]
-                                                                    │
-                                                                    ▼
-            [EventBridge] ──────trigger──────> [Lambda Batch Inference]
-                                                                    │
-                                                      (Dự đoán hàng ngày & Lưu kết quả)
-                                                                    ▼
-                                                               [DynamoDB]
-                                                                    ▲
-                                                                    │
-                                                          [Lambda API Handler]
-                                                                    ▲
-                                                                    │
-                                                              [API Gateway]
-                                                                    ▲
-                                                                    │
-                                                    [Web Dashboard] (Streamlit)
+[EventBridge] ──trigger──> [nasdaq-daily-collector]
+                                  │
+                          Đọc tickers.json từ S3
+                                  │
+                          Chia thành các chunk 100
+                                  │
+                          Đẩy vào SQS Queue
+                                  │
+                                  ▼
+                    ┌── SQS: daily-collector-queue ──┐
+                    │           (Fan-Out)             │
+                    ▼                                 ▼
+          [nasdaq-collector-producer]    [nasdaq-collector-producer]
+                    │          (xử lý song song)           │
+                    └────────── Yahoo Finance ──────────────┘
+                                      │
+                                      ▼
+                               S3 Raw Zone
+                                      │
+                            (S3 Event Notification)
+                                      ▼
+                          [nasdaq-quality-gate]
+                                      │
+                         ┌────────────┴────────────┐
+                         ▼                         ▼
+               cleansed_daily/                quarantine/
+                         │
+                         ▼
+                    [nasdaq-daily-etl]
+                         │
+                    (Feature Engineering - Polars)
+                         │
+                         ▼
+              S3 Processed Zone (processed/YYYY.parquet)
 ```
 
-#### 2.2. Phân hệ Dự đoán & Phục vụ Giao diện (Inference & Serving Pipeline)
-* **Batch Inference:** Định kỳ hằng ngày, EventBridge trigger Lambda tải `model.pkl` mới nhất từ S3 \(\rightarrow\) Lấy các đặc trưng mới nhất từ Feature Store \(\rightarrow\) Thực hiện dự đoán xu hướng cho toàn bộ danh sách mã cổ phiếu \(\rightarrow\) Lưu kết quả kèm Confidence Score vào **Amazon DynamoDB**.
-* **API Serving:** Người dùng tương tác trên Streamlit Dashboard \(\rightarrow\) Gửi yêu cầu qua **API Gateway** \(\rightarrow\) `Lambda API Handler` truy vấn trực tiếp từ DynamoDB để trả về kết quả ngay lập tức (giảm thiểu tối đa Latency so với việc chạy mô hình Real-time).
+#### Luồng C – Dự đoán & Phục vụ
+* **Huấn luyện mô hình:** Mô hình XGBoost được huấn luyện offline trên bộ feature đã xử lý và lưu vào `S3 Model Registry`.
+* **Batch Inference:** EventBridge kích hoạt `nasdaq-stock-predictor` hàng ngày để tải model mới nhất, lấy feature mới, dự đoán xu hướng cho tất cả mã NASDAQ, và lưu kết quả vào **Amazon DynamoDB**.
+* **API Serving:** Người dùng tương tác trên Streamlit Dashboard → Gửi request qua **AWS API Gateway** → `nasdaq-stock-predictor` truy vấn từ DynamoDB trả về kết quả ngay lập tức.
 
-#### 2.3. Đóng gói Container (Containerized ETL Deployment)
-`Lambda ETL` được đóng gói dưới dạng **Docker Container Image** tải lên **Amazon ECR** thay vì ZIP package nhằm hỗ trợ các thư viện có kích thước lớn như:
+```text
+            [EventBridge] ──────trigger──────> [nasdaq-stock-predictor]
+                                                      │
+                                          Tải model từ S3 Model Registry
+                                                      │
+                                          Lấy features từ Feature Store
+                                                      │
+                                          Chạy inference (XGBoost)
+                                                      │
+                                                  [DynamoDB]
+                                                      ▲
+                                                      │
+                                          [Lambda API Handler]
+                                                      ▲
+                                                      │
+                                                [API Gateway]
+                                                      ▲
+                                                      │
+                                          [Streamlit Dashboard]
+```
+
+#### Đóng gói Container
+Tất cả Lambda Function được đóng gói bằng **Docker** và đẩy lên **Amazon ECR** để hỗ trợ các thư viện lớn:
 * `Polars` & `PyArrow`
 * `Pandera` & `Scikit-Learn` / `XGBoost`
-
-**Quy trình triển khai:**
-```text
-
-[Local Source Code]
-        │
-        ▼
-   [Docker Build]
-        │
-        ▼
-    [Amazon ECR]
-        │
-        ▼
-[AWS Lambda Container]
-        ▲
-        │
-   (S3 Event Trigger)
-        │
-        ▼
-   [S3 Raw Bucket]
-```
-
-#### 2.4. Cấu trúc Mô-đun Lambda
-```text
-Lambda ETL Architecture
-├── lambda_function.py     # Entry Point
-├── config.py              # Biến môi trường & Đường dẫn S3
-├── validation/
-│   ├── schemas.py         # Pandera Data Schemas
-│   └── validator.py       # Quy tắc kiểm định Data Quality
-├── transform/
-│   └── cleaning.py        # Polars ETL & Làm sạch dữ liệu
-├── services/
-│   └── s3_service.py      # Module tương tác Boto3 S3
-└── utils/
-    └── logger.py          # Log hệ thống
-```
 
 ---
 
 ### 3. Chi tiết các Thành phần Kỹ thuật
 
 #### 3.1. Dữ liệu và Feature Engineering
-* **Dữ liệu đầu vào (OHLCV):** Open, High, Low, Close, Volume.
-* **Danh sách Đặc trưng (Features):**
-  * **Momentum & Trend:** SMA20, SMA50, EMA20, EMA50, MACD.
-  * **Oscillators:** RSI (14 days).
-  * **Volatility:** ATR (Average True Range), Volatility (20 days).
-  * **Volume:** Volume Ratio (\(\text{Volume}_T / \text{SMA20}(\text{Volume})\)).
-  * **Returns:** Return_1 (Lợi nhuận 1 ngày), Return_5 (Lợi nhuận 5 ngày).
+* **Dữ liệu đầu vào (OHLCV):** Open, High, Low, Close, Adj_Close, Volume.
+* **Danh sách Đặc trưng (16 chỉ báo):**
+  * **Chỉ báo Xu hướng (Trend):** SMA_5, SMA_20, EMA_12, EMA_26
+  * **Chỉ báo Động lượng (Momentum):** MACD, MACD_Signal, MACD_Hist, RSI_14
+  * **Chỉ báo Biến động (Volatility):** BB_Upper, BB_Lower, BB_Width, Intraday_Volatility
+  * **Đặc trưng Lag & Return:** Lag_Close_1, Lag_Close_2, Lag_Close_3, Daily_Return
+  * **Nhãn dự đoán:** Label (1 = Tăng, 0 = Giảm)
 
-#### 3.2. Kho dữ liệu (Data Warehouse Star Schema)
-* **Fact Tables:**
-  * `FactPrice`: `Date` | `Symbol` | `Open` | `High` | `Low` | `Close` | `Volume`
-  * `FactFeature`: `Date` | `Symbol` | `RSI` | `MACD` | `ATR` | `Target`
-* **Dimension Tables:**
-  * `DimDate`: `Date` | `Month` | `Quarter` | `Year`
-  * `DimSymbol`: `Symbol` | `AssetType` (Stock/ETF) | `Sector`
+#### 3.2. Cấu trúc Parquet sau Feature Engineering
+Mỗi file `processed/YYYY.parquet` chứa các cột:
 
-#### 3.3. Bộ máy Kiểm thử (Backtesting Engine)
+| Nhóm | Cột |
+|:---|:---|
+| **Raw OHLCV** | `Date`, `Symbol`, `Open`, `High`, `Low`, `Close`, `Adj_Close`, `Volume` |
+| **Chỉ báo Xu hướng** | `SMA_5`, `SMA_20`, `EMA_12`, `EMA_26` |
+| **Chỉ báo Động lượng** | `MACD`, `MACD_Signal`, `MACD_Hist`, `RSI_14` |
+| **Chỉ báo Biến động** | `BB_Upper`, `BB_Lower`, `BB_Width`, `Intraday_Volatility` |
+| **Lag & Return** | `Lag_Close_1`, `Lag_Close_2`, `Lag_Close_3`, `Daily_Return` |
+| **Nhãn dự đoán** | `Label` (1 = Tăng, 0 = Giảm) |
+
+#### 3.3. Bảng tổng hợp Lambda Functions
+
+| Lambda Function | Handler | Memory | Timeout | Trigger |
+|:---|:---|:---:|:---:|:---|
+| `nasdaq-daily-collector` | `src.lambda_daily_collector.lambda_handler` | 512 MB | 5 phút | Amazon EventBridge (Hàng ngày) |
+| `nasdaq-collector-producer` | `src.lambda_collector_producer.lambda_handler` | 1024 MB | 15 phút | Amazon SQS Trigger |
+| `nasdaq-quality-gate` | `src.lambda_quality_gate.lambda_handler` | 512 MB | 5 phút | Amazon S3 Event |
+| `nasdaq-daily-etl` | `src.lambda_daily_etl.lambda_handler` | 3008 MB | 15 phút | Amazon S3 Event |
+| `nasdaq-stock-predictor` | `src.lambda_stock_predictor.lambda_handler` | 2048 MB | 30 giây | Amazon API Gateway |
+
+#### 3.4. Bộ máy Kiểm thử (Backtesting Engine)
 Mô phỏng hiệu năng tài chính của mô hình dựa trên quy tắc giao dịch:
 * **Tín hiệu Mua/Nắm giữ:** Khi Model dự đoán nhãn 1 (Xu hướng tăng).
 * **Tín hiệu Bán/Đứng ngoài:** Khi Model dự đoán nhãn 0 (Xu hướng giảm/đi ngang).
