@@ -25,7 +25,7 @@ chapter: false
 
 &emsp; **Chương trình thực tập:** Workforce Bootcamp – First Cloud AI Journey (FCAJ)
 
-&emsp; **Tên dự án:** NASDAQ Stock Price Prediction & AWS Serverless ETL Pipeline
+&emsp; **Tên dự án:** END-TO-END DATA PIPELINE & BACKTESTING ENGINE FOR STOCK MARKET DIRECTION
 
 &emsp; **Thời gian thực tập:** Từ 15/06/2026 đến 15/08/2026
 
@@ -35,7 +35,7 @@ chapter: false
 
 # Giới thiệu
 
-Báo cáo này trình bày quá trình thực hiện dự án **NASDAQ Stock Price Prediction & AWS Serverless ETL Pipeline** trong khuôn khổ chương trình **First Cloud AI Journey (FCAJ)**.
+Báo cáo này trình bày quá trình thực hiện dự án **END-TO-END DATA PIPELINE & BACKTESTING ENGINE FOR STOCK MARKET DIRECTION** trong khuôn khổ chương trình **First Cloud AI Journey (FCAJ)**.
 
 Mục tiêu của dự án là xây dựng một hệ thống dự đoán giá cổ phiếu theo kiến trúc **Serverless** trên nền tảng AWS. Hệ thống bao gồm các thành phần thu thập dữ liệu tự động từ Yahoo Finance, kiểm tra chất lượng dữ liệu, xử lý ETL, huấn luyện mô hình Machine Learning bằng XGBoost, triển khai dịch vụ dự đoán thông qua AWS Lambda và API Gateway, đồng thời trực quan hóa kết quả trên Dashboard.
 

@@ -25,7 +25,7 @@ chapter: false
 
 &emsp; **Internship Program:** Workforce Bootcamp – First Cloud AI Journey (FCAJ)
 
-&emsp; **Project:** NASDAQ Stock Price Prediction & AWS Serverless ETL Pipeline
+&emsp; **Project:** END-TO-END DATA PIPELINE & BACKTESTING ENGINE FOR STOCK MARKET DIRECTION
 
 &emsp; **Internship Duration:** From June 15, 2026 to August 15, 2026
 
@@ -35,7 +35,7 @@ chapter: false
 
 # Introduction
 
-This report summarizes the implementation of the **NASDAQ Stock Price Prediction & AWS Serverless ETL Pipeline** project during the **First Cloud AI Journey (FCAJ)** internship program.
+This report summarizes the implementation of the **END-TO-END DATA PIPELINE & BACKTESTING ENGINE FOR STOCK MARKET DIRECTION** project during the **First Cloud AI Journey (FCAJ)** internship program.
 
 The objective of the project is to develop a serverless stock price prediction system on AWS. The solution includes automated data collection from Yahoo Finance, data quality validation, ETL processing, machine learning model training using XGBoost, deployment of prediction services through AWS Lambda and Amazon API Gateway, and visualization of prediction results using an interactive dashboard.
 
