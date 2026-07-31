@@ -73,7 +73,7 @@ Expected output:
 {{% notice info %}}
 **Why use Polars instead of Pandas?**
 
-Polars is built on a native multi-threaded execution engine and the Apache Arrow memory format, making it significantly faster than Pandas for large-scale data processing. When working with decades of historical market data from more than 3,000 stock tickers, processing performance becomes a critical factor.
+Polars is built on a native multi-threaded execution engine and the Apache Arrow memory format, making it **10–50× faster than Pandas** for large-scale data processing. When working with decades of historical market data from more than 3,000 stock tickers, processing performance becomes a critical factor.
 {{% /notice %}}
 
 ---

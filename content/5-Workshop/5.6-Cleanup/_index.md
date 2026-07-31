@@ -1,22 +1,22 @@
 ---
-title : "Clean up Resources"
+title : "Clean Up Resources"
 date: ""
 weight : 6
 chapter : false
 pre : " <b> 5.6. </b> "
 ---
 
-#### Clean up Resources
+#### Clean Up Resources
 
-After completing the workshop, delete all AWS resources to avoid unexpected charges.
+After completing this workshop, delete all AWS resources to avoid unnecessary charges.
 
-{{%notice warning%}}
-**Warning:** The steps below will permanently delete all data and resources created during this workshop. Make sure to back up anything you need before proceeding.
-{{%/notice%}}
+{{% notice warning %}}
+**Warning:** The following steps will permanently delete all resources and data created during this workshop. Make sure you have backed up any important files before proceeding.
+{{% /notice %}}
 
 ---
 
-#### Step 1: Delete Lambda Functions
+#### Step 1: Delete the Lambda Functions
 
 ```bash
 aws lambda delete-function --function-name nasdaq-daily-collector --region ap-southeast-1
@@ -28,16 +28,24 @@ aws lambda delete-function --function-name nasdaq-stock-predictor --region ap-so
 
 ---
 
-#### Step 2: Delete EventBridge Rule
+#### Step 2: Delete the Amazon EventBridge Rule
 
 ```bash
-aws events remove-targets --rule nasdaq-daily-pipeline-trigger --ids lambda-target --region ap-southeast-1
-aws events delete-rule --name nasdaq-daily-pipeline-trigger --region ap-southeast-1
+# Remove the targets first
+aws events remove-targets \
+    --rule nasdaq-daily-pipeline-trigger \
+    --ids lambda-target \
+    --region ap-southeast-1
+
+# Then delete the rule
+aws events delete-rule \
+    --name nasdaq-daily-pipeline-trigger \
+    --region ap-southeast-1
 ```
 
 ---
 
-#### Step 3: Delete SQS Queue
+#### Step 3: Delete the Amazon SQS Queue
 
 ```bash
 aws sqs delete-queue \
@@ -47,14 +55,20 @@ aws sqs delete-queue \
 
 ---
 
-#### Step 4: Empty & Delete S3 Buckets
+#### Step 4: Delete the Amazon S3 Buckets
+
+{{% notice warning %}}
+**Note:** All objects inside an S3 bucket must be deleted before the bucket itself can be removed.
+{{% /notice %}}
 
 ```bash
+# Delete all objects in each bucket
 aws s3 rm s3://my-nasdaq-stock-market-raw-2026-ap-southeast-1 --recursive
 aws s3 rm s3://my-nasdaq-stock-processed-2026-ap-southeast-1 --recursive
 aws s3 rm s3://my-nasdaq-stock-models-2026-ap-southeast-1 --recursive
 aws s3 rm s3://my-nasdaq-stock-simulation-2026-ap-southeast-1 --recursive
 
+# Delete the buckets
 aws s3 rb s3://my-nasdaq-stock-market-raw-2026-ap-southeast-1
 aws s3 rb s3://my-nasdaq-stock-processed-2026-ap-southeast-1
 aws s3 rb s3://my-nasdaq-stock-models-2026-ap-southeast-1
@@ -63,33 +77,49 @@ aws s3 rb s3://my-nasdaq-stock-simulation-2026-ap-southeast-1
 
 ---
 
-#### Step 5: Delete ECR Repository
+#### Step 5: Delete the Amazon ECR Repository
 
 ```bash
-aws ecr delete-repository --repository-name nasdaq-etl-lambda --force --region ap-southeast-1
+aws ecr delete-repository \
+    --repository-name nasdaq-etl-lambda \
+    --force \
+    --region ap-southeast-1
 ```
 
 ---
 
-#### Step 6: Delete IAM Role
+#### Step 6: Delete the IAM Role
 
 ```bash
-aws iam detach-role-policy --role-name nasdaq-etl-lambda-role --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
-aws iam detach-role-policy --role-name nasdaq-etl-lambda-role --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess
-aws iam detach-role-policy --role-name nasdaq-etl-lambda-role --policy-arn arn:aws:iam::aws:policy/AmazonSQSFullAccess
+# Detach the managed policies first
+aws iam detach-role-policy \
+    --role-name nasdaq-etl-lambda-role \
+    --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+aws iam detach-role-policy \
+    --role-name nasdaq-etl-lambda-role \
+    --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess
+
+aws iam detach-role-policy \
+    --role-name nasdaq-etl-lambda-role \
+    --policy-arn arn:aws:iam::aws:policy/AmazonSQSFullAccess
+
+# Delete the IAM role
 aws iam delete-role --role-name nasdaq-etl-lambda-role
 ```
 
 ---
 
-#### Verification Checklist
+#### Verify Resource Cleanup
 
-- ✅ Lambda Console — No more `nasdaq-` functions
-- ✅ S3 Console — No more `my-nasdaq-` buckets
-- ✅ SQS Console — `daily-collector-queue` deleted
-- ✅ ECR Console — `nasdaq-etl-lambda` repository deleted
-- ✅ EventBridge Console — `nasdaq-daily-pipeline-trigger` rule deleted
+Verify the following resources have been successfully removed in the AWS Management Console:
 
-{{%notice tip%}}
-Check **AWS Cost Explorer** after 24 hours to confirm no remaining charges from this workshop.
-{{%/notice%}}
+- ✅ **AWS Lambda Console** — No Lambda functions related to `nasdaq-` remain.
+- ✅ **Amazon S3 Console** — No buckets related to `my-nasdaq-` remain.
+- ✅ **Amazon SQS Console** — The `daily-collector-queue` has been deleted.
+- ✅ **Amazon ECR Console** — The `nasdaq-etl-lambda` repository has been deleted.
+- ✅ **Amazon EventBridge Console** — The `nasdaq-daily-pipeline-trigger` rule has been deleted.
+
+{{% notice tip %}}
+You can also review **AWS Cost Explorer** after approximately 24 hours to confirm that no additional charges are being generated by the resources created during this workshop.
+{{% /notice %}}
